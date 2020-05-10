@@ -1,0 +1,267 @@
+openapi: 3.0.2
+info:
+  contact:
+    email: info@inoven.ai
+    name: Inoven Support
+  description: Classify Custom Image Recognition Service
+  title: Classify
+  version: 1.0.0
+servers:
+- url: /
+security:
+- x-api-key: []
+paths:
+  /models:
+    delete:
+      description: Delete Model
+      operationId: delete_model
+      parameters:
+      - description: You can find your model ids from Classify Dashboard.
+        explode: true
+        in: query
+        name: model_id
+        required: true
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          description: Successfully Deleted.
+        "400":
+          description: Bad request, parameter or format error. please check your query.
+        "401":
+          description: You are not authorized to delete this model.
+      security:
+      - x-api-key: []
+      summary: Delete Model
+      x-accepts: application/json
+    description: |-
+      You can create different Image Recognition models under single account.
+      You should create at least 1 model to start using Classify
+    get:
+      description: 'Get the list of of models created '
+      operationId: get_models_list
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                model_info:
+                  value:
+                    models:
+                      model:
+                      - name: model1
+                        id: "123456"
+                        training_status: trained
+                      - name: model2
+                        id: "1234567"
+                        training_status: untrained
+          description: Query executed succesfully.
+        "204":
+          description: No projects created yet.
+        "401":
+          description: You don't have authorization to get the model list.
+      security:
+      - x-api-key: []
+      summary: Get Models List
+      x-accepts: application/json
+    post:
+      description: Update Model Name
+      operationId: update_model
+      parameters:
+      - description: Model Name
+        explode: true
+        in: query
+        name: model_name
+        required: true
+        schema:
+          type: string
+        style: form
+      - description: Model id to be renamed.
+        explode: true
+        in: query
+        name: model_id
+        required: true
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          description: Successfull
+        "400":
+          description: Bad request, parameter or format error. Please check your query.
+        "401":
+          description: You are not authorized to edit this model.
+      security:
+      - x-api-key: []
+      summary: Update Model
+      x-accepts: application/json
+    put:
+      description: Create a new custom image recognition model
+      operationId: create_new_model
+      parameters:
+      - description: Set a name for your model
+        examples:
+          project_name:
+            value:
+              model_name: '"Test model name"'
+        explode: true
+        in: query
+        name: model_name
+        required: true
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          description: Successfully created
+        "400":
+          description: Bad request, parameter or format error. Please check your query.
+        "401":
+          description: You are not authorized to create a new model
+      security:
+      - x-api-key: []
+      summary: Create New Model
+      x-accepts: application/json
+    servers:
+    - url: https://api.classifyai.com
+    summary: Create and Manage Image Recognition Models
+  /predict:
+    description: Send an image to tag by using your custom trained model
+    post:
+      description: Send a local image to tag
+      operationId: tag_local_image
+      parameters:
+      - description: Type your trained model id to predict. You get your model's id
+          from Classify Dashboard.
+        explode: true
+        in: query
+        name: model_id
+        required: true
+        schema:
+          type: string
+        style: form
+      requestBody:
+        $ref: '#/components/requestBodies/inline_object'
+        content:
+          multipart/form-data:
+            schema:
+              properties:
+                file:
+                  format: binary
+                  type: string
+              type: object
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Tag List:
+                  value:
+                    tags:
+                      tag:
+                      - name: test1
+                        score: "0.99219"
+                      - name: test2
+                        score: "0.94121"
+          description: Custom trained model prediction response.
+        "400":
+          description: Bad request, parameter or format error. Please check your query,
+            image format and image size.
+        "401":
+          description: You are not authorized for this operation.
+      security:
+      - x-api-key: []
+      summary: Predict by Image
+      x-contentType: multipart/form-data
+      x-accepts: application/json
+    servers:
+    - url: https://api.classifyai.com
+    summary: Tag Local Image
+  /predict_by_image_url:
+    description: Send an image url to predict by using your custom trained model
+    get:
+      description: Predict image tags by providing image url
+      operationId: tag_image_by_url
+      parameters:
+      - description: Type your trained model id to predict. You get your model's id
+          from Classify Dashboard.
+        explode: true
+        in: query
+        name: model_id
+        required: true
+        schema:
+          type: string
+        style: form
+      - description: Provide image url to predict
+        explode: true
+        in: query
+        name: image_url
+        required: true
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Tag List:
+                  value:
+                    tags:
+                      tag:
+                      - name: test1
+                        score: "0.99219"
+                      - name: test2
+                        score: "0.94121"
+          description: Custom trained model prediction response.
+        "400":
+          description: Bad request, parameter or format error. Please check your query,
+            image format and image size.
+        "401":
+          description: You are not authorized for this operation.
+      security:
+      - x-api-key: []
+      summary: Tag Image by Using Image Url
+      x-accepts: application/json
+    servers:
+    - url: https://api.classifyai.com
+    summary: Tag Image by Using Image Url
+components:
+  requestBodies:
+    inline_object:
+      content:
+        multipart/form-data:
+          schema:
+            $ref: '#/components/schemas/inline_object'
+      required: true
+  responses:
+    created:
+      description: Successfully created
+    prediction_response:
+      content:
+        application/json:
+          examples:
+            Tag List:
+              value:
+                tags:
+                  tag:
+                  - name: test1
+                    score: "0.99219"
+                  - name: test2
+                    score: "0.94121"
+      description: Custom trained model prediction response.
+  schemas:
+    inline_object:
+      properties:
+        file:
+          format: binary
+          type: string
+      type: object
+  securitySchemes:
+    x-api-key:
+      in: header
+      name: x-api-key
+      type: apiKey
+
