@@ -2,7 +2,7 @@
 
 Classify
 - API version: 1.0.0
-  - Build date: 2020-05-09T22:52:58.649888+03:00[Europe/Istanbul]
+  - Build date: 2020-05-19T21:16:41.064057+03:00[Europe/Istanbul]
 
 Classify Custom Image Recognition Service
 
@@ -83,7 +83,7 @@ import org.openapitools.client.api.DefaultApi;
 public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("http://localhost");
+    defaultClient.setBasePath("https://api.classifyai.com");
     
     // Configure API key authorization: x-api-key
     ApiKeyAuth x-api-key = (ApiKeyAuth) defaultClient.getAuthentication("x-api-key");
@@ -109,13 +109,15 @@ public class Example {
 
 ## Documentation for API Endpoints
 
-All URIs are relative to *http://localhost*
+All URIs are relative to *https://api.classifyai.com*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *DefaultApi* | [**createNewModel**](docs/DefaultApi.md#createNewModel) | **PUT** /models | Create New Model
 *DefaultApi* | [**deleteModel**](docs/DefaultApi.md#deleteModel) | **DELETE** /models | Delete Model
 *DefaultApi* | [**getModelsList**](docs/DefaultApi.md#getModelsList) | **GET** /models | Get Models List
+*DefaultApi* | [**indexByImageUrl**](docs/DefaultApi.md#indexByImageUrl) | **GET** /index_by_image_url | Index by Using Image URL
+*DefaultApi* | [**indexImage**](docs/DefaultApi.md#indexImage) | **POST** /index_image | Index Local Image
 *DefaultApi* | [**tagImageByUrl**](docs/DefaultApi.md#tagImageByUrl) | **GET** /predict_by_image_url | Tag Image by Using Image Url
 *DefaultApi* | [**tagLocalImage**](docs/DefaultApi.md#tagLocalImage) | **POST** /predict | Predict by Image
 *DefaultApi* | [**updateModel**](docs/DefaultApi.md#updateModel) | **POST** /models | Update Model
@@ -124,6 +126,7 @@ Class | Method | HTTP request | Description
 ## Documentation for Models
 
  - [InlineObject](docs/InlineObject.md)
+ - [InlineObject1](docs/InlineObject1.md)
 
 
 ## Documentation for Authorization

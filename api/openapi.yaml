@@ -7,7 +7,8 @@ info:
   title: Classify
   version: 1.0.0
 servers:
-- url: /
+- description: Classify API
+  url: https://api.classifyai.com
 security:
 - x-api-key: []
 paths:
@@ -56,9 +57,9 @@ paths:
                       - name: model2
                         id: "1234567"
                         training_status: untrained
+              schema:
+                type: string
           description: Query executed succesfully.
-        "204":
-          description: No projects created yet.
         "401":
           description: You don't have authorization to get the model list.
       security:
@@ -151,6 +152,7 @@ paths:
                   format: binary
                   type: string
               type: object
+        description: Multipart/form-data
         required: true
       responses:
         "200":
@@ -228,8 +230,107 @@ paths:
     servers:
     - url: https://api.classifyai.com
     summary: Tag Image by Using Image Url
+  /index_by_image_url:
+    description: Index by Using Image URL
+    get:
+      description: Index by Using Image URL
+      operationId: index_by_image_url
+      parameters:
+      - description: Model ID
+        explode: true
+        in: query
+        name: model_id
+        required: true
+        schema:
+          type: string
+        style: form
+      - description: Image URL
+        explode: true
+        in: query
+        name: image_url
+        required: true
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                status:
+                  value:
+                    status: success
+              schema:
+                type: string
+          description: Image Indexed
+        "400":
+          description: Bad request, parameter or format error. Please check your query,
+            image format and image size.
+        "401":
+          description: You are not authorized for this operation.
+      summary: Index by Using Image URL
+      x-accepts: application/json
+    servers:
+    - url: https://api.classifyai.com
+    summary: Index by Using Image URL
+  /index_image:
+    description: Index Local Image
+    post:
+      description: Index Local Image
+      operationId: index_image
+      parameters:
+      - description: Model ID
+        explode: true
+        in: query
+        name: model_id
+        required: true
+        schema:
+          type: string
+        style: form
+      requestBody:
+        $ref: '#/components/requestBodies/inline_object_1'
+        content:
+          multipart/form-data:
+            schema:
+              properties:
+                file:
+                  format: binary
+                  type: string
+              type: object
+        description: Multipart/form-data
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Index Status:
+                  value:
+                    status: success
+              schema:
+                type: string
+          description: Image Indexed
+        "400":
+          description: Bad request, parameter or format error. Please check your query,
+            image format and image size.
+        "401":
+          description: You are not authorized for this operation.
+      security:
+      - x-api-key: []
+      summary: Index Local Image
+      x-contentType: multipart/form-data
+      x-accepts: application/json
+    servers:
+    - url: https://api.classifyai.com
+    summary: Index Local Image
 components:
   requestBodies:
+    inline_object_1:
+      content:
+        multipart/form-data:
+          schema:
+            $ref: '#/components/schemas/inline_object_1'
+      required: true
     inline_object:
       content:
         multipart/form-data:
@@ -253,6 +354,12 @@ components:
                     score: "0.94121"
       description: Custom trained model prediction response.
   schemas:
+    inline_object_1:
+      properties:
+        file:
+          format: binary
+          type: string
+      type: object
     inline_object:
       properties:
         file:

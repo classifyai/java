@@ -26,16 +26,16 @@ import java.io.File;
 import java.io.IOException;
 
 /**
- * InlineObject
+ * InlineObject1
  */
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2020-05-19T21:16:41.064057+03:00[Europe/Istanbul]")
-public class InlineObject {
+public class InlineObject1 {
   public static final String SERIALIZED_NAME_FILE = "file";
   @SerializedName(SERIALIZED_NAME_FILE)
   private File file;
 
 
-  public InlineObject file(File file) {
+  public InlineObject1 file(File file) {
     
     this.file = file;
     return this;
@@ -66,8 +66,8 @@ public class InlineObject {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    InlineObject inlineObject = (InlineObject) o;
-    return Objects.equals(this.file, inlineObject.file);
+    InlineObject1 inlineObject1 = (InlineObject1) o;
+    return Objects.equals(this.file, inlineObject1.file);
   }
 
   @Override
@@ -79,7 +79,7 @@ public class InlineObject {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class InlineObject {\n");
+    sb.append("class InlineObject1 {\n");
     sb.append("    file: ").append(toIndentedString(file)).append("\n");
     sb.append("}");
     return sb.toString();

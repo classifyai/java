@@ -74,7 +74,41 @@ public class DefaultApiTest {
      */
     @Test
     public void getModelsListTest() throws ApiException {
-        api.getModelsList();
+        String response = api.getModelsList();
+
+        // TODO: test validations
+    }
+    
+    /**
+     * Index by Using Image URL
+     *
+     * Index by Using Image URL
+     *
+     * @throws ApiException
+     *          if the Api call fails
+     */
+    @Test
+    public void indexByImageUrlTest() throws ApiException {
+        String modelId = null;
+        String imageUrl = null;
+        String response = api.indexByImageUrl(modelId, imageUrl);
+
+        // TODO: test validations
+    }
+    
+    /**
+     * Index Local Image
+     *
+     * Index Local Image
+     *
+     * @throws ApiException
+     *          if the Api call fails
+     */
+    @Test
+    public void indexImageTest() throws ApiException {
+        String modelId = null;
+        File file = null;
+        String response = api.indexImage(modelId, file);
 
         // TODO: test validations
     }
