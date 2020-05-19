@@ -7,7 +7,7 @@ Method | HTTP request | Description
 [**createNewModel**](DefaultApi.md#createNewModel) | **PUT** /models | Create New Model
 [**deleteModel**](DefaultApi.md#deleteModel) | **DELETE** /models | Delete Model
 [**getModelsList**](DefaultApi.md#getModelsList) | **GET** /models | Get Models List
-[**indexByImageUrl**](DefaultApi.md#indexByImageUrl) | **GET** /index_by_image_url | Index by Using Image URL
+[**indexByImageUrl**](DefaultApi.md#indexByImageUrl) | **POST** /index_by_image_url | Index by Using Image URL
 [**indexImage**](DefaultApi.md#indexImage) | **POST** /index_image | Index Local Image
 [**tagImageByUrl**](DefaultApi.md#tagImageByUrl) | **GET** /predict_by_image_url | Tag Image by Using Image Url
 [**tagLocalImage**](DefaultApi.md#tagLocalImage) | **POST** /predict | Predict by Image
@@ -222,7 +222,7 @@ This endpoint does not need any parameter.
 
 <a name="indexByImageUrl"></a>
 # **indexByImageUrl**
-> String indexByImageUrl(modelId, imageUrl)
+> indexByImageUrl(inlineObject)
 
 Index by Using Image URL
 
@@ -250,11 +250,9 @@ public class Example {
     //x-api-key.setApiKeyPrefix("Token");
 
     DefaultApi apiInstance = new DefaultApi(defaultClient);
-    String modelId = "modelId_example"; // String | Model ID
-    String imageUrl = "imageUrl_example"; // String | Image URL
+    InlineObject inlineObject = new InlineObject(); // InlineObject | 
     try {
-      String result = apiInstance.indexByImageUrl(modelId, imageUrl);
-      System.out.println(result);
+      apiInstance.indexByImageUrl(inlineObject);
     } catch (ApiException e) {
       System.err.println("Exception when calling DefaultApi#indexByImageUrl");
       System.err.println("Status code: " + e.getCode());
@@ -270,12 +268,11 @@ public class Example {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **modelId** | **String**| Model ID |
- **imageUrl** | **String**| Image URL |
+ **inlineObject** | [**InlineObject**](InlineObject.md)|  |
 
 ### Return type
 
-**String**
+null (empty response body)
 
 ### Authorization
 
@@ -283,8 +280,8 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: application/json
+ - **Content-Type**: application/json
+ - **Accept**: Not defined
 
 ### HTTP response details
 | Status code | Description | Response headers |
@@ -295,7 +292,7 @@ Name | Type | Description  | Notes
 
 <a name="indexImage"></a>
 # **indexImage**
-> String indexImage(modelId, file)
+> String indexImage(modelId, tag, file)
 
 Index Local Image
 
@@ -323,10 +320,11 @@ public class Example {
     //x-api-key.setApiKeyPrefix("Token");
 
     DefaultApi apiInstance = new DefaultApi(defaultClient);
-    String modelId = "modelId_example"; // String | Model ID
+    String modelId = "modelId_example"; // String | 
+    String tag = "tag_example"; // String | 
     File file = new File("/path/to/file"); // File | 
     try {
-      String result = apiInstance.indexImage(modelId, file);
+      String result = apiInstance.indexImage(modelId, tag, file);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling DefaultApi#indexImage");
@@ -343,7 +341,8 @@ public class Example {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **modelId** | **String**| Model ID |
+ **modelId** | **String**|  | [optional]
+ **tag** | **String**|  | [optional]
  **file** | **File**|  | [optional]
 
 ### Return type
@@ -440,7 +439,7 @@ null (empty response body)
 
 <a name="tagLocalImage"></a>
 # **tagLocalImage**
-> tagLocalImage(modelId, file)
+> tagLocalImage(file, modelId)
 
 Predict by Image
 
@@ -468,10 +467,10 @@ public class Example {
     //x-api-key.setApiKeyPrefix("Token");
 
     DefaultApi apiInstance = new DefaultApi(defaultClient);
-    String modelId = "modelId_example"; // String | Type your trained model id to predict. You get your model's id from Classify Dashboard.
     File file = new File("/path/to/file"); // File | 
+    String modelId = "modelId_example"; // String | 
     try {
-      apiInstance.tagLocalImage(modelId, file);
+      apiInstance.tagLocalImage(file, modelId);
     } catch (ApiException e) {
       System.err.println("Exception when calling DefaultApi#tagLocalImage");
       System.err.println("Status code: " + e.getCode());
@@ -487,8 +486,8 @@ public class Example {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **modelId** | **String**| Type your trained model id to predict. You get your model&#39;s id from Classify Dashboard. |
  **file** | **File**|  | [optional]
+ **modelId** | **String**|  | [optional]
 
 ### Return type
 

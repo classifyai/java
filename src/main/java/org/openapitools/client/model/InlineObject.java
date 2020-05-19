@@ -22,39 +22,89 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import java.io.File;
 import java.io.IOException;
 
 /**
  * InlineObject
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2020-05-19T21:16:41.064057+03:00[Europe/Istanbul]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2020-05-20T00:05:34.011322+03:00[Europe/Istanbul]")
 public class InlineObject {
-  public static final String SERIALIZED_NAME_FILE = "file";
-  @SerializedName(SERIALIZED_NAME_FILE)
-  private File file;
+  public static final String SERIALIZED_NAME_IMAGE_URL = "image_url";
+  @SerializedName(SERIALIZED_NAME_IMAGE_URL)
+  private String imageUrl;
+
+  public static final String SERIALIZED_NAME_TAG = "tag";
+  @SerializedName(SERIALIZED_NAME_TAG)
+  private String tag;
+
+  public static final String SERIALIZED_NAME_MODEL_ID = "model_id";
+  @SerializedName(SERIALIZED_NAME_MODEL_ID)
+  private String modelId;
 
 
-  public InlineObject file(File file) {
+  public InlineObject imageUrl(String imageUrl) {
     
-    this.file = file;
+    this.imageUrl = imageUrl;
     return this;
   }
 
    /**
-   * Get file
-   * @return file
+   * Get imageUrl
+   * @return imageUrl
   **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "")
+  @ApiModelProperty(required = true, value = "")
 
-  public File getFile() {
-    return file;
+  public String getImageUrl() {
+    return imageUrl;
   }
 
 
-  public void setFile(File file) {
-    this.file = file;
+  public void setImageUrl(String imageUrl) {
+    this.imageUrl = imageUrl;
+  }
+
+
+  public InlineObject tag(String tag) {
+    
+    this.tag = tag;
+    return this;
+  }
+
+   /**
+   * Get tag
+   * @return tag
+  **/
+  @ApiModelProperty(required = true, value = "")
+
+  public String getTag() {
+    return tag;
+  }
+
+
+  public void setTag(String tag) {
+    this.tag = tag;
+  }
+
+
+  public InlineObject modelId(String modelId) {
+    
+    this.modelId = modelId;
+    return this;
+  }
+
+   /**
+   * Get modelId
+   * @return modelId
+  **/
+  @ApiModelProperty(required = true, value = "")
+
+  public String getModelId() {
+    return modelId;
+  }
+
+
+  public void setModelId(String modelId) {
+    this.modelId = modelId;
   }
 
 
@@ -67,12 +117,14 @@ public class InlineObject {
       return false;
     }
     InlineObject inlineObject = (InlineObject) o;
-    return Objects.equals(this.file, inlineObject.file);
+    return Objects.equals(this.imageUrl, inlineObject.imageUrl) &&
+        Objects.equals(this.tag, inlineObject.tag) &&
+        Objects.equals(this.modelId, inlineObject.modelId);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(file);
+    return Objects.hash(imageUrl, tag, modelId);
   }
 
 
@@ -80,7 +132,9 @@ public class InlineObject {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class InlineObject {\n");
-    sb.append("    file: ").append(toIndentedString(file)).append("\n");
+    sb.append("    imageUrl: ").append(toIndentedString(imageUrl)).append("\n");
+    sb.append("    tag: ").append(toIndentedString(tag)).append("\n");
+    sb.append("    modelId: ").append(toIndentedString(modelId)).append("\n");
     sb.append("}");
     return sb.toString();
   }

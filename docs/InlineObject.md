@@ -6,7 +6,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**file** | [**File**](File.md) |  |  [optional]
+**imageUrl** | **String** |  | 
+**tag** | **String** |  | 
+**modelId** | **String** |  | 
 
 
 

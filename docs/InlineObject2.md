@@ -1,14 +1,13 @@
 
 
-# InlineObject1
+# InlineObject2
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**modelId** | **String** |  |  [optional]
-**tag** | **String** |  |  [optional]
 **file** | [**File**](File.md) |  |  [optional]
+**modelId** | **String** |  |  [optional]
 
 
 

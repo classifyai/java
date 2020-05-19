@@ -127,60 +127,6 @@ paths:
     servers:
     - url: https://api.classifyai.com
     summary: Create and Manage Image Recognition Models
-  /predict:
-    description: Send an image to tag by using your custom trained model
-    post:
-      description: Send a local image to tag
-      operationId: tag_local_image
-      parameters:
-      - description: Type your trained model id to predict. You get your model's id
-          from Classify Dashboard.
-        explode: true
-        in: query
-        name: model_id
-        required: true
-        schema:
-          type: string
-        style: form
-      requestBody:
-        $ref: '#/components/requestBodies/inline_object'
-        content:
-          multipart/form-data:
-            schema:
-              properties:
-                file:
-                  format: binary
-                  type: string
-              type: object
-        description: Multipart/form-data
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              examples:
-                Tag List:
-                  value:
-                    tags:
-                      tag:
-                      - name: test1
-                        score: "0.99219"
-                      - name: test2
-                        score: "0.94121"
-          description: Custom trained model prediction response.
-        "400":
-          description: Bad request, parameter or format error. Please check your query,
-            image format and image size.
-        "401":
-          description: You are not authorized for this operation.
-      security:
-      - x-api-key: []
-      summary: Predict by Image
-      x-contentType: multipart/form-data
-      x-accepts: application/json
-    servers:
-    - url: https://api.classifyai.com
-    summary: Tag Local Image
   /predict_by_image_url:
     description: Send an image url to predict by using your custom trained model
     get:
@@ -232,43 +178,47 @@ paths:
     summary: Tag Image by Using Image Url
   /index_by_image_url:
     description: Index by Using Image URL
-    get:
+    post:
       description: Index by Using Image URL
       operationId: index_by_image_url
-      parameters:
-      - description: Model ID
-        explode: true
-        in: query
-        name: model_id
+      requestBody:
+        $ref: '#/components/requestBodies/inline_object'
+        content:
+          application/json:
+            examples:
+              image_information:
+                value:
+                  image_url: http://TYPE_IMAGE_URL
+                  tag: TYPE OUTPUT TAG
+                  model_id: TYPE YOUR MODEL ID
+            schema:
+              properties:
+                image_url:
+                  type: string
+                tag:
+                  type: string
+                model_id:
+                  type: string
+              required:
+              - image_url
+              - model_id
+              - tag
+              type: object
+        description: You should send image_url, image_tag and model_id in request
+          body.
         required: true
-        schema:
-          type: string
-        style: form
-      - description: Image URL
-        explode: true
-        in: query
-        name: image_url
-        required: true
-        schema:
-          type: string
-        style: form
       responses:
         "200":
-          content:
-            application/json:
-              examples:
-                status:
-                  value:
-                    status: success
-              schema:
-                type: string
           description: Image Indexed
         "400":
           description: Bad request, parameter or format error. Please check your query,
             image format and image size.
         "401":
           description: You are not authorized for this operation.
+      security:
+      - x-api-key: []
       summary: Index by Using Image URL
+      x-contentType: application/json
       x-accepts: application/json
     servers:
     - url: https://api.classifyai.com
@@ -278,21 +228,16 @@ paths:
     post:
       description: Index Local Image
       operationId: index_image
-      parameters:
-      - description: Model ID
-        explode: true
-        in: query
-        name: model_id
-        required: true
-        schema:
-          type: string
-        style: form
       requestBody:
         $ref: '#/components/requestBodies/inline_object_1'
         content:
           multipart/form-data:
             schema:
               properties:
+                model_id:
+                  type: string
+                tag:
+                  type: string
                 file:
                   format: binary
                   type: string
@@ -323,6 +268,52 @@ paths:
     servers:
     - url: https://api.classifyai.com
     summary: Index Local Image
+  /predict:
+    description: Send an image to tag by using your custom trained model
+    post:
+      description: Send a local image to tag
+      operationId: tag_local_image
+      requestBody:
+        $ref: '#/components/requestBodies/inline_object_2'
+        content:
+          multipart/form-data:
+            schema:
+              properties:
+                file:
+                  format: binary
+                  type: string
+                model_id:
+                  type: string
+              type: object
+        description: Multipart/form-data
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Tag List:
+                  value:
+                    tags:
+                      tag:
+                      - name: test1
+                        score: "0.99219"
+                      - name: test2
+                        score: "0.94121"
+          description: Custom trained model prediction response.
+        "400":
+          description: Bad request, parameter or format error. Please check your query,
+            image format and image size.
+        "401":
+          description: You are not authorized for this operation.
+      security:
+      - x-api-key: []
+      summary: Predict by Image
+      x-contentType: multipart/form-data
+      x-accepts: application/json
+    servers:
+    - url: https://api.classifyai.com
+    summary: Tag Local Image
 components:
   requestBodies:
     inline_object_1:
@@ -333,9 +324,15 @@ components:
       required: true
     inline_object:
       content:
-        multipart/form-data:
+        application/json:
           schema:
             $ref: '#/components/schemas/inline_object'
+      required: true
+    inline_object_2:
+      content:
+        multipart/form-data:
+          schema:
+            $ref: '#/components/schemas/inline_object_2'
       required: true
   responses:
     created:
@@ -356,14 +353,33 @@ components:
   schemas:
     inline_object_1:
       properties:
+        model_id:
+          type: string
+        tag:
+          type: string
         file:
           format: binary
           type: string
       type: object
     inline_object:
       properties:
+        image_url:
+          type: string
+        tag:
+          type: string
+        model_id:
+          type: string
+      required:
+      - image_url
+      - model_id
+      - tag
+      type: object
+    inline_object_2:
+      properties:
         file:
           format: binary
+          type: string
+        model_id:
           type: string
       type: object
   securitySchemes:

@@ -42,6 +42,22 @@ public class InlineObject1Test {
     }
 
     /**
+     * Test the property 'modelId'
+     */
+    @Test
+    public void modelIdTest() {
+        // TODO: test modelId
+    }
+
+    /**
+     * Test the property 'tag'
+     */
+    @Test
+    public void tagTest() {
+        // TODO: test tag
+    }
+
+    /**
      * Test the property 'file'
      */
     @Test

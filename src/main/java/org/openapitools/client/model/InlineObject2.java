@@ -26,70 +26,20 @@ import java.io.File;
 import java.io.IOException;
 
 /**
- * InlineObject1
+ * InlineObject2
  */
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2020-05-20T00:05:34.011322+03:00[Europe/Istanbul]")
-public class InlineObject1 {
-  public static final String SERIALIZED_NAME_MODEL_ID = "model_id";
-  @SerializedName(SERIALIZED_NAME_MODEL_ID)
-  private String modelId;
-
-  public static final String SERIALIZED_NAME_TAG = "tag";
-  @SerializedName(SERIALIZED_NAME_TAG)
-  private String tag;
-
+public class InlineObject2 {
   public static final String SERIALIZED_NAME_FILE = "file";
   @SerializedName(SERIALIZED_NAME_FILE)
   private File file;
 
-
-  public InlineObject1 modelId(String modelId) {
-    
-    this.modelId = modelId;
-    return this;
-  }
-
-   /**
-   * Get modelId
-   * @return modelId
-  **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "")
-
-  public String getModelId() {
-    return modelId;
-  }
+  public static final String SERIALIZED_NAME_MODEL_ID = "model_id";
+  @SerializedName(SERIALIZED_NAME_MODEL_ID)
+  private String modelId;
 
 
-  public void setModelId(String modelId) {
-    this.modelId = modelId;
-  }
-
-
-  public InlineObject1 tag(String tag) {
-    
-    this.tag = tag;
-    return this;
-  }
-
-   /**
-   * Get tag
-   * @return tag
-  **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "")
-
-  public String getTag() {
-    return tag;
-  }
-
-
-  public void setTag(String tag) {
-    this.tag = tag;
-  }
-
-
-  public InlineObject1 file(File file) {
+  public InlineObject2 file(File file) {
     
     this.file = file;
     return this;
@@ -112,6 +62,29 @@ public class InlineObject1 {
   }
 
 
+  public InlineObject2 modelId(String modelId) {
+    
+    this.modelId = modelId;
+    return this;
+  }
+
+   /**
+   * Get modelId
+   * @return modelId
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "")
+
+  public String getModelId() {
+    return modelId;
+  }
+
+
+  public void setModelId(String modelId) {
+    this.modelId = modelId;
+  }
+
+
   @Override
   public boolean equals(java.lang.Object o) {
     if (this == o) {
@@ -120,25 +93,23 @@ public class InlineObject1 {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    InlineObject1 inlineObject1 = (InlineObject1) o;
-    return Objects.equals(this.modelId, inlineObject1.modelId) &&
-        Objects.equals(this.tag, inlineObject1.tag) &&
-        Objects.equals(this.file, inlineObject1.file);
+    InlineObject2 inlineObject2 = (InlineObject2) o;
+    return Objects.equals(this.file, inlineObject2.file) &&
+        Objects.equals(this.modelId, inlineObject2.modelId);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(modelId, tag, file);
+    return Objects.hash(file, modelId);
   }
 
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class InlineObject1 {\n");
-    sb.append("    modelId: ").append(toIndentedString(modelId)).append("\n");
-    sb.append("    tag: ").append(toIndentedString(tag)).append("\n");
+    sb.append("class InlineObject2 {\n");
     sb.append("    file: ").append(toIndentedString(file)).append("\n");
+    sb.append("    modelId: ").append(toIndentedString(modelId)).append("\n");
     sb.append("}");
     return sb.toString();
   }

@@ -15,6 +15,7 @@ package org.openapitools.client.api;
 
 import org.openapitools.client.ApiException;
 import java.io.File;
+import org.openapitools.client.model.InlineObject;
 import org.junit.Test;
 import org.junit.Ignore;
 
@@ -89,9 +90,8 @@ public class DefaultApiTest {
      */
     @Test
     public void indexByImageUrlTest() throws ApiException {
-        String modelId = null;
-        String imageUrl = null;
-        String response = api.indexByImageUrl(modelId, imageUrl);
+        InlineObject inlineObject = null;
+        api.indexByImageUrl(inlineObject);
 
         // TODO: test validations
     }
@@ -107,8 +107,9 @@ public class DefaultApiTest {
     @Test
     public void indexImageTest() throws ApiException {
         String modelId = null;
+        String tag = null;
         File file = null;
-        String response = api.indexImage(modelId, file);
+        String response = api.indexImage(modelId, tag, file);
 
         // TODO: test validations
     }
@@ -140,9 +141,9 @@ public class DefaultApiTest {
      */
     @Test
     public void tagLocalImageTest() throws ApiException {
-        String modelId = null;
         File file = null;
-        api.tagLocalImage(modelId, file);
+        String modelId = null;
+        api.tagLocalImage(file, modelId);
 
         // TODO: test validations
     }

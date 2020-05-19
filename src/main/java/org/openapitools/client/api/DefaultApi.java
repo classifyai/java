@@ -28,6 +28,7 @@ import java.io.IOException;
 
 
 import java.io.File;
+import org.openapitools.client.model.InlineObject;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -397,8 +398,7 @@ public class DefaultApi {
     }
     /**
      * Build call for indexByImageUrl
-     * @param modelId Model ID (required)
-     * @param imageUrl Image URL (required)
+     * @param inlineObject  (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -410,27 +410,19 @@ public class DefaultApi {
         <tr><td> 401 </td><td> You are not authorized for this operation. </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call indexByImageUrlCall(String modelId, String imageUrl, final ApiCallback _callback) throws ApiException {
-        Object localVarPostBody = null;
+    public okhttp3.Call indexByImageUrlCall(InlineObject inlineObject, final ApiCallback _callback) throws ApiException {
+        Object localVarPostBody = inlineObject;
 
         // create path and map variables
         String localVarPath = "/index_by_image_url";
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        if (modelId != null) {
-            localVarQueryParams.addAll(localVarApiClient.parameterToPair("model_id", modelId));
-        }
-
-        if (imageUrl != null) {
-            localVarQueryParams.addAll(localVarApiClient.parameterToPair("image_url", imageUrl));
-        }
-
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
         final String[] localVarAccepts = {
-            "application/json"
+            
         };
         final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
         if (localVarAccept != null) {
@@ -438,30 +430,25 @@ public class DefaultApi {
         }
 
         final String[] localVarContentTypes = {
-            
+            "application/json"
         };
         final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
         localVarHeaderParams.put("Content-Type", localVarContentType);
 
         String[] localVarAuthNames = new String[] { "x-api-key" };
-        return localVarApiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call indexByImageUrlValidateBeforeCall(String modelId, String imageUrl, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call indexByImageUrlValidateBeforeCall(InlineObject inlineObject, final ApiCallback _callback) throws ApiException {
         
-        // verify the required parameter 'modelId' is set
-        if (modelId == null) {
-            throw new ApiException("Missing the required parameter 'modelId' when calling indexByImageUrl(Async)");
-        }
-        
-        // verify the required parameter 'imageUrl' is set
-        if (imageUrl == null) {
-            throw new ApiException("Missing the required parameter 'imageUrl' when calling indexByImageUrl(Async)");
+        // verify the required parameter 'inlineObject' is set
+        if (inlineObject == null) {
+            throw new ApiException("Missing the required parameter 'inlineObject' when calling indexByImageUrl(Async)");
         }
         
 
-        okhttp3.Call localVarCall = indexByImageUrlCall(modelId, imageUrl, _callback);
+        okhttp3.Call localVarCall = indexByImageUrlCall(inlineObject, _callback);
         return localVarCall;
 
     }
@@ -469,9 +456,7 @@ public class DefaultApi {
     /**
      * Index by Using Image URL
      * Index by Using Image URL
-     * @param modelId Model ID (required)
-     * @param imageUrl Image URL (required)
-     * @return String
+     * @param inlineObject  (required)
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -481,17 +466,15 @@ public class DefaultApi {
         <tr><td> 401 </td><td> You are not authorized for this operation. </td><td>  -  </td></tr>
      </table>
      */
-    public String indexByImageUrl(String modelId, String imageUrl) throws ApiException {
-        ApiResponse<String> localVarResp = indexByImageUrlWithHttpInfo(modelId, imageUrl);
-        return localVarResp.getData();
+    public void indexByImageUrl(InlineObject inlineObject) throws ApiException {
+        indexByImageUrlWithHttpInfo(inlineObject);
     }
 
     /**
      * Index by Using Image URL
      * Index by Using Image URL
-     * @param modelId Model ID (required)
-     * @param imageUrl Image URL (required)
-     * @return ApiResponse&lt;String&gt;
+     * @param inlineObject  (required)
+     * @return ApiResponse&lt;Void&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -501,17 +484,15 @@ public class DefaultApi {
         <tr><td> 401 </td><td> You are not authorized for this operation. </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<String> indexByImageUrlWithHttpInfo(String modelId, String imageUrl) throws ApiException {
-        okhttp3.Call localVarCall = indexByImageUrlValidateBeforeCall(modelId, imageUrl, null);
-        Type localVarReturnType = new TypeToken<String>(){}.getType();
-        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    public ApiResponse<Void> indexByImageUrlWithHttpInfo(InlineObject inlineObject) throws ApiException {
+        okhttp3.Call localVarCall = indexByImageUrlValidateBeforeCall(inlineObject, null);
+        return localVarApiClient.execute(localVarCall);
     }
 
     /**
      * Index by Using Image URL (asynchronously)
      * Index by Using Image URL
-     * @param modelId Model ID (required)
-     * @param imageUrl Image URL (required)
+     * @param inlineObject  (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
@@ -523,16 +504,16 @@ public class DefaultApi {
         <tr><td> 401 </td><td> You are not authorized for this operation. </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call indexByImageUrlAsync(String modelId, String imageUrl, final ApiCallback<String> _callback) throws ApiException {
+    public okhttp3.Call indexByImageUrlAsync(InlineObject inlineObject, final ApiCallback<Void> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = indexByImageUrlValidateBeforeCall(modelId, imageUrl, _callback);
-        Type localVarReturnType = new TypeToken<String>(){}.getType();
-        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        okhttp3.Call localVarCall = indexByImageUrlValidateBeforeCall(inlineObject, _callback);
+        localVarApiClient.executeAsync(localVarCall, _callback);
         return localVarCall;
     }
     /**
      * Build call for indexImage
-     * @param modelId Model ID (required)
+     * @param modelId  (optional)
+     * @param tag  (optional)
      * @param file  (optional)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
@@ -545,7 +526,7 @@ public class DefaultApi {
         <tr><td> 401 </td><td> You are not authorized for this operation. </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call indexImageCall(String modelId, File file, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call indexImageCall(String modelId, String tag, File file, final ApiCallback _callback) throws ApiException {
         Object localVarPostBody = null;
 
         // create path and map variables
@@ -553,13 +534,17 @@ public class DefaultApi {
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        if (modelId != null) {
-            localVarQueryParams.addAll(localVarApiClient.parameterToPair("model_id", modelId));
-        }
-
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+        if (modelId != null) {
+            localVarFormParams.put("model_id", modelId);
+        }
+
+        if (tag != null) {
+            localVarFormParams.put("tag", tag);
+        }
+
         if (file != null) {
             localVarFormParams.put("file", file);
         }
@@ -583,15 +568,10 @@ public class DefaultApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call indexImageValidateBeforeCall(String modelId, File file, final ApiCallback _callback) throws ApiException {
-        
-        // verify the required parameter 'modelId' is set
-        if (modelId == null) {
-            throw new ApiException("Missing the required parameter 'modelId' when calling indexImage(Async)");
-        }
+    private okhttp3.Call indexImageValidateBeforeCall(String modelId, String tag, File file, final ApiCallback _callback) throws ApiException {
         
 
-        okhttp3.Call localVarCall = indexImageCall(modelId, file, _callback);
+        okhttp3.Call localVarCall = indexImageCall(modelId, tag, file, _callback);
         return localVarCall;
 
     }
@@ -599,7 +579,8 @@ public class DefaultApi {
     /**
      * Index Local Image
      * Index Local Image
-     * @param modelId Model ID (required)
+     * @param modelId  (optional)
+     * @param tag  (optional)
      * @param file  (optional)
      * @return String
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -611,15 +592,16 @@ public class DefaultApi {
         <tr><td> 401 </td><td> You are not authorized for this operation. </td><td>  -  </td></tr>
      </table>
      */
-    public String indexImage(String modelId, File file) throws ApiException {
-        ApiResponse<String> localVarResp = indexImageWithHttpInfo(modelId, file);
+    public String indexImage(String modelId, String tag, File file) throws ApiException {
+        ApiResponse<String> localVarResp = indexImageWithHttpInfo(modelId, tag, file);
         return localVarResp.getData();
     }
 
     /**
      * Index Local Image
      * Index Local Image
-     * @param modelId Model ID (required)
+     * @param modelId  (optional)
+     * @param tag  (optional)
      * @param file  (optional)
      * @return ApiResponse&lt;String&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -631,8 +613,8 @@ public class DefaultApi {
         <tr><td> 401 </td><td> You are not authorized for this operation. </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<String> indexImageWithHttpInfo(String modelId, File file) throws ApiException {
-        okhttp3.Call localVarCall = indexImageValidateBeforeCall(modelId, file, null);
+    public ApiResponse<String> indexImageWithHttpInfo(String modelId, String tag, File file) throws ApiException {
+        okhttp3.Call localVarCall = indexImageValidateBeforeCall(modelId, tag, file, null);
         Type localVarReturnType = new TypeToken<String>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -640,7 +622,8 @@ public class DefaultApi {
     /**
      * Index Local Image (asynchronously)
      * Index Local Image
-     * @param modelId Model ID (required)
+     * @param modelId  (optional)
+     * @param tag  (optional)
      * @param file  (optional)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
@@ -653,9 +636,9 @@ public class DefaultApi {
         <tr><td> 401 </td><td> You are not authorized for this operation. </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call indexImageAsync(String modelId, File file, final ApiCallback<String> _callback) throws ApiException {
+    public okhttp3.Call indexImageAsync(String modelId, String tag, File file, final ApiCallback<String> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = indexImageValidateBeforeCall(modelId, file, _callback);
+        okhttp3.Call localVarCall = indexImageValidateBeforeCall(modelId, tag, file, _callback);
         Type localVarReturnType = new TypeToken<String>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
@@ -793,8 +776,8 @@ public class DefaultApi {
     }
     /**
      * Build call for tagLocalImage
-     * @param modelId Type your trained model id to predict. You get your model&#39;s id from Classify Dashboard. (required)
      * @param file  (optional)
+     * @param modelId  (optional)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -806,7 +789,7 @@ public class DefaultApi {
         <tr><td> 401 </td><td> You are not authorized for this operation. </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call tagLocalImageCall(String modelId, File file, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call tagLocalImageCall(File file, String modelId, final ApiCallback _callback) throws ApiException {
         Object localVarPostBody = null;
 
         // create path and map variables
@@ -814,15 +797,15 @@ public class DefaultApi {
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        if (modelId != null) {
-            localVarQueryParams.addAll(localVarApiClient.parameterToPair("model_id", modelId));
-        }
-
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
         if (file != null) {
             localVarFormParams.put("file", file);
+        }
+
+        if (modelId != null) {
+            localVarFormParams.put("model_id", modelId);
         }
 
         final String[] localVarAccepts = {
@@ -844,15 +827,10 @@ public class DefaultApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call tagLocalImageValidateBeforeCall(String modelId, File file, final ApiCallback _callback) throws ApiException {
-        
-        // verify the required parameter 'modelId' is set
-        if (modelId == null) {
-            throw new ApiException("Missing the required parameter 'modelId' when calling tagLocalImage(Async)");
-        }
+    private okhttp3.Call tagLocalImageValidateBeforeCall(File file, String modelId, final ApiCallback _callback) throws ApiException {
         
 
-        okhttp3.Call localVarCall = tagLocalImageCall(modelId, file, _callback);
+        okhttp3.Call localVarCall = tagLocalImageCall(file, modelId, _callback);
         return localVarCall;
 
     }
@@ -860,8 +838,8 @@ public class DefaultApi {
     /**
      * Predict by Image
      * Send a local image to tag
-     * @param modelId Type your trained model id to predict. You get your model&#39;s id from Classify Dashboard. (required)
      * @param file  (optional)
+     * @param modelId  (optional)
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -871,15 +849,15 @@ public class DefaultApi {
         <tr><td> 401 </td><td> You are not authorized for this operation. </td><td>  -  </td></tr>
      </table>
      */
-    public void tagLocalImage(String modelId, File file) throws ApiException {
-        tagLocalImageWithHttpInfo(modelId, file);
+    public void tagLocalImage(File file, String modelId) throws ApiException {
+        tagLocalImageWithHttpInfo(file, modelId);
     }
 
     /**
      * Predict by Image
      * Send a local image to tag
-     * @param modelId Type your trained model id to predict. You get your model&#39;s id from Classify Dashboard. (required)
      * @param file  (optional)
+     * @param modelId  (optional)
      * @return ApiResponse&lt;Void&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -890,16 +868,16 @@ public class DefaultApi {
         <tr><td> 401 </td><td> You are not authorized for this operation. </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<Void> tagLocalImageWithHttpInfo(String modelId, File file) throws ApiException {
-        okhttp3.Call localVarCall = tagLocalImageValidateBeforeCall(modelId, file, null);
+    public ApiResponse<Void> tagLocalImageWithHttpInfo(File file, String modelId) throws ApiException {
+        okhttp3.Call localVarCall = tagLocalImageValidateBeforeCall(file, modelId, null);
         return localVarApiClient.execute(localVarCall);
     }
 
     /**
      * Predict by Image (asynchronously)
      * Send a local image to tag
-     * @param modelId Type your trained model id to predict. You get your model&#39;s id from Classify Dashboard. (required)
      * @param file  (optional)
+     * @param modelId  (optional)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
@@ -911,9 +889,9 @@ public class DefaultApi {
         <tr><td> 401 </td><td> You are not authorized for this operation. </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call tagLocalImageAsync(String modelId, File file, final ApiCallback<Void> _callback) throws ApiException {
+    public okhttp3.Call tagLocalImageAsync(File file, String modelId, final ApiCallback<Void> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = tagLocalImageValidateBeforeCall(modelId, file, _callback);
+        okhttp3.Call localVarCall = tagLocalImageValidateBeforeCall(file, modelId, _callback);
         localVarApiClient.executeAsync(localVarCall, _callback);
         return localVarCall;
     }
